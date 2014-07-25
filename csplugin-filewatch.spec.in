@@ -10,6 +10,9 @@ Source: %{name}-%{version}.tar.gz
 BuildRoot: /var/tmp/%{name}-%{version}
 Requires: clearsync >= 1.5 /sbin/service /usr/bin/sudo
 BuildRequires: clearsync-devel >= 1.5
+BuildRequires: autoconf >= 2.63
+BuildRequires: automake
+BuildRequires: libtool
 BuildRequires: expat-devel
 Summary: ClearSync file watch plugin
 Requires(pre): /sbin/ldconfig
