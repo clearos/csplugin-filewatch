@@ -2,7 +2,7 @@ AUTOMAKE_OPTIONS = foreign
 
 ACLOCAL_AMFLAGS = -I m4
 
-EXTRA_DIST = autogen.sh
+EXTRA_DIST = autogen.sh csplugin-filewatch.spec
 
 AM_CXXFLAGS = ${CXXFLAGS}
 lib_LTLIBRARIES = libcsplugin-filewatch.la
