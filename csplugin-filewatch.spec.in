@@ -1,14 +1,20 @@
 # ClearSync File Watch Plugin RPM spec
 Name: @PACKAGE_TARNAME@
 Version: @PACKAGE_VERSION@
-Release: 18%{dist}
+Release: 19%{dist}
 Vendor: ClearFoundation
 License: GPL
 Group: System/Plugins
 Packager: ClearFoundation
 Source: %{name}-%{version}.tar.gz
 BuildRoot: /var/tmp/%{name}-%{version}
-Requires: clearsync >= 1.5 /sbin/service /usr/bin/sudo
+Requires: clearsync >= 1.5
+Requires: /usr/bin/sudo
+%if "0%{dist}" == "0.v6"
+Requires: /usr/bin/service
+%else
+Requires: /usr/bin/systemctl
+%endif
 BuildRequires: clearsync-devel >= 1.5
 BuildRequires: autoconf >= 2.63
 BuildRequires: automake
@@ -47,7 +53,7 @@ rm -f ${RPM_BUILD_ROOT}/%{_libdir}/libcsplugin-filewatch.la
 %if "0%{dist}" == "0.v6"
 /sbin/service clearsyncd condrestart 2>&1 || :
 %else
-/usr/bin/systemctl reload-or-restart clearsync.service -q
+/usr/bin/systemctl try-restart clearsync -q
 %endif
 
 # Add command(s) to sudo configuration
@@ -73,7 +79,7 @@ fi
 %if "0%{dist}" == "0.v6"
 /sbin/service clearsyncd condrestart 2>&1 || :
 %else
-/usr/bin/systemctl reload-or-restart clearsync.service -q
+/usr/bin/systemctl try-restart clearsync -q
 %endif
 
 # Files
